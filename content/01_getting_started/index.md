@@ -12,7 +12,7 @@
 ssh dtu_training@ip_adress
 ```
 4. You can open multiple terminals, by duplicating the 'https://university.dynatrace.com/' and opening the terminal.
-5. The HoT session lab guides are found under 'Activities'
+5. The HoT session lab guides are found under 'Guide'
 
 ![started 2](../../assets/images/started_2.png)
 

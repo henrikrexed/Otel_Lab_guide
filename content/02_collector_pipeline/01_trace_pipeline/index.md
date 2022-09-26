@@ -42,8 +42,8 @@ This collector is currently receiving traces and exporting it directly the loggi
 1. Edit the OpenTelemetryCollector object
    In the Bastion host, edit the file  : `exercice/01_collector/metrics/openTelemetry-manifest.yaml
    Change the Trace pipeline to process span , where each task will always :
-   - start with the memory_limiter
-   - end with the back processor 
+      - start with the memory_limiter
+      - end with the back processor 
    ```bash
    (bastion)$ vi openTelemetry-manifest.yaml
    ```
@@ -64,17 +64,19 @@ This collector is currently receiving traces and exporting it directly the loggi
    Here is the link to documentation of the [k8sattributes processor](https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor).
  
    Edit the `openTelemetry-manifest.yaml`, by adding the right defintion of processor 
-    ```bash
+   
+   ```bash
    (bastion)$ vi openTelemetry-manifest.yaml
    ```
 
 1. Change the Processor flow
+   
    Change the Processor flow in the trace pipeline to add the `k8sattributes` after the `memory_limiter`
-
    Apply the change made on the collector :
+   
     ```bash
       (bastion)$ kubectl apply -f openTelemetry-manifest.yaml
-      ```
+    ```
    
 1. Look a the logs of the collector to see the updated format of the spans
    Get the new Pod name of the colellector and look a the logs :
@@ -86,10 +88,10 @@ This collector is currently receiving traces and exporting it directly the loggi
 
 1. Update the current trace pipeline
    In the OpenTelemtry Collector pipeline , edit  `openTelemetry-manifest.yaml` to export the spans to :
-   - the logs of the collector
-   - Dynatrace OpenTelemtry Trace ingest API
+      -The logs of the collector
+      - Dynatrace OpenTelemtry Trace ingest API
 
-    ```bash
+   ```bash
    (bastion)$ vi openTelemetry-manifest.yaml
    ```
    
@@ -144,7 +146,7 @@ This collector is currently receiving traces and exporting it directly the loggi
 3. Update the trace pipeline 
    Add the `spanmetrics` processor in the trace processor flow:
 
-      ```yaml
+   ```yaml
    traces:
       receivers: [otlp]
       processors: [memory_limiter,k8sattributes,spanmetrics,batch]
@@ -153,29 +155,36 @@ This collector is currently receiving traces and exporting it directly the loggi
 
 4. Add a metric pipeline
    To be able to look at the produced metrics , let's add a metric pipeline
-    ```yaml
+   
+   ```yaml
    metrics:
       receivers: [otlp]
       processors: [memory_limiter,k8sattributes,batch]
       exporters: [prometheus]
-    ```
-5. Apply the changes 
-  ```bash
-   (bastion)$ kubectl apply -f openTelemetry-manifest.yaml
    ```
+   
+5. Apply the changes 
+
+   ```bash
+    (bastion)$ kubectl apply -f openTelemetry-manifest.yaml
+   ```
+   
 6. Look at the prometheus metrics produced by the Collector
    Get the new Pod name of the Collector
-  ```bash
-   (bastion)$ kubectl get pods
+   
+   ```bash
+    (bastion)$ kubectl get pods
    ```
 
    Expose the port 9090 locally on the bastion host :
+   
    ```bash
    (bastion)$ kubectl port-forward <collector pod name> 9090:9090
    ```
 
    Open another terminal and connecto the the bastion host.
    Look at the metrics by send http request to `http://localhost:9090/metrics`
+   
    ```bash
    (bastion)$ curl http://localhost:9090/metrics
    ```

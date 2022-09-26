@@ -13,25 +13,30 @@ In this module you will go through the following actions:
 
 1. Go to the folder of the exercice :
 
-In the Bastion host, go to o the folder : `exercice/02_auto-instrumentation`
+   In the Bastion host, go to o the folder : `exercice/02_auto-instrumentation`
+   
    ```bash
    (bastion)$ cd ~
    (bastion)$ cd exercice/02_auto-instrumentation`
- ```
+   ```
 
 2. Create a new Namespace
+   
    ```bash
    (bastion)$ kubectl create ns hipster-shop-nootel
    ```
 
 3. Deploy the OpenTelemtry Sidecar Collector
+   
    ```bash
    (bastion)$ kubectl apply -f openTelemetry-sidecar.yaml -n hipster-shop-nootel
    ```
+   
 4. Look at the Instrumentation object
    ```bash
    (bastion)$ cat instrumentation.yaml
    ```
+   
 5. Deploy the instrumentation object
    ```bash
    (bastion)$ kubectl apply -f  instrumentation.yaml -n hipster-shop-nootel
@@ -42,24 +47,27 @@ In the Bastion host, go to o the folder : `exercice/02_auto-instrumentation`
 
 1. Add the right instrumentation annotation in the deployment file
  
-    To be able to inject the right OpenTelemetry Agent in the workload, we need to add the right annotation:
-- For Java : `instrumentation.opentelemetry.io/inject-java: "true"`
-- For Nodejs: `instrumentation.opentelemetry.io/inject-nodejs: "true"`
-- For Python: `instrumentation.opentelemetry.io/inject-python: "true"`
-- for Dotnet: `instrumentation.opentelemetry.io/inject-dotnet: "true"`
+    To be able to inject the right OpenTelemetry Agent in the workload, we need to add the right annotation for:
+      - Java : `instrumentation.opentelemetry.io/inject-java: "true"`
+      - Nodejs: `instrumentation.opentelemetry.io/inject-nodejs: "true"`
+      - Python: `instrumentation.opentelemetry.io/inject-python: "true"`
+      - Dotnet: `instrumentation.opentelemetry.io/inject-dotnet: "true"`
 
     Edit `k8Sdemo-nootel.yaml` add the right annotation based on the annoation `technology`
 
 2. Deploy the application
- ```bash
+
+   ```bash
    (bastion)$ kubectl apply -f  k8Sdemo-nootel.yaml -n hipster-shop-nootel
    ```
 
 ### Step 3 : Look at the generated traces
-1   Open your Dynatrace tenant :
-> 1. Navigate to `Distributed traces` via Dynatrace Menu
-> 2. Click on ingested Traces
-> 3. Click on the produced by the service K6
+
+1. Open your Dynatrace tenant :
+
+   > 1. Navigate to `Distributed traces` via Dynatrace Menu
+   > 2. Click on ingested Traces
+   > 3. Click on the produced by the service K6
 
 
 
