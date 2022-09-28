@@ -40,10 +40,10 @@ This collector is currently receiving traces and exporting it directly the loggi
 ### Step 2. Update the current Trace Pipeline 
 
 1. Edit the OpenTelemetryCollector object
-   In the Bastion host, edit the file  : `exercice/01_collector/metrics/openTelemetry-manifest.yaml
+   In the Bastion host, edit the file  : `exercice/01_collector/metrics/openTelemetry-manifest.yaml`
    Change the Trace pipeline to process span , where each task will always :
-      - start with the memory_limiter
-      - end with the back processor 
+      - start with the `memory_limiter`
+      - end with the `bach` processor 
    ```bash
    (bastion)$ vi openTelemetry-manifest.yaml
    ```
@@ -87,8 +87,8 @@ This collector is currently receiving traces and exporting it directly the loggi
 ### Step 3. Export the generated spans to Dynatrace
 
 1. Update the current trace pipeline
-   In the OpenTelemtry Collector pipeline , edit  `openTelemetry-manifest.yaml` to export the spans to :
-      -The logs of the collector
+   In the OpenTelemetry Collector pipeline , edit  `openTelemetry-manifest.yaml` to export the spans to :
+      - The logs of the collector
       - Dynatrace OpenTelemtry Trace ingest API
 
    ```bash
@@ -182,7 +182,7 @@ This collector is currently receiving traces and exporting it directly the loggi
    (bastion)$ kubectl port-forward <collector pod name> 9090:9090
    ```
 
-   Open another terminal and connecto the the bastion host.
+   Open another terminal and connect to the bastion host.
    Look at the metrics by send http request to `http://localhost:9090/metrics`
    
    ```bash

@@ -6,4 +6,4 @@ We will focus on using the most common Processors.
 ### Prerequisites
 
 - Access to the _Bastion host_
-- Access to the acl-docs repository
+

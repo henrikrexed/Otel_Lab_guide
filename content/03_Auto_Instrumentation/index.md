@@ -1,13 +1,13 @@
 ## Auto Instrumentation 
 
-In this module to inject the auto instrumentation library using the OpenTelemtry Operator.
+In this module to inject the auto instrumentation library using the OpenTelemetry Operator.
 
 In this module you will go through the following actions:
 
 1. Create a new Namespace for our demo application
-1. Deploy the OpenTelemtry SideCar collector in the namesapce
-1. Deploy the Instrumentation object in the namespace
-1. Update the Instrumetnation object by adding the right instrumentation annotation
+1. Deploy the OpenTelemetry SideCar collector in the namespace
+1. Deploy the `Instrumentation` object in the namespace
+1. Update the `Instrumetnation` object by adding the right instrumentation annotation
 
 ### Step 1: Create the New Namespace
 
@@ -16,7 +16,7 @@ In this module you will go through the following actions:
    In the Bastion host, go to o the folder : `exercice/02_auto-instrumentation`
    
    ```bash
-   (bastion)$ cd ~
+   (bastion)$ cd ~/ACE_OTEL_SCRIPT
    (bastion)$ cd exercice/02_auto-instrumentation`
    ```
 
@@ -26,7 +26,7 @@ In this module you will go through the following actions:
    (bastion)$ kubectl create ns hipster-shop-nootel
    ```
 
-3. Deploy the OpenTelemtry Sidecar Collector
+3. Deploy the OpenTelemetry Sidecar Collector
    
    ```bash
    (bastion)$ kubectl apply -f openTelemetry-sidecar.yaml -n hipster-shop-nootel
@@ -53,7 +53,7 @@ In this module you will go through the following actions:
       - Python: `instrumentation.opentelemetry.io/inject-python: "true"`
       - Dotnet: `instrumentation.opentelemetry.io/inject-dotnet: "true"`
 
-    Edit `k8Sdemo-nootel.yaml` add the right annotation based on the annoation `technology`
+    Edit `k8Sdemo-nootel.yaml` add the right annotation based on the annotation `technology`
 
 2. Deploy the application
 

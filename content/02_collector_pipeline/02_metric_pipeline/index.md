@@ -2,16 +2,16 @@
 
 In this lab you'll learn how to :
 * build a Metric pipeline
-* use the processor K8sattrributes
-* use the processor spanMetrics
-* use the otlp http exporter
+* use the processor `metricstransform`
+* use the processor `spanMetrics`
+* use the dynatrace exporter
 
 ### Step 1: Update the collector Pipeline
- 1. Look at  the OpenTelemtryCollector template
+ 1. Look at  the OpenTelemetryCollector template
    In the Bastion host, go to o the folder : `exercice/01_collector/metrics`
     
    ```bash
-   (bastion)$ cd ~
+   (bastion)$ cd ~/ACE_OTEL_SCRIPT
    (bastion)$ cd exercice/01_collector/metrics`
    (bastion)$ cat openTelemetry-manifest.yaml
    ```
@@ -49,9 +49,9 @@ In this lab you'll learn how to :
     
 1. Add a metric pipeline
     The metric that would :
-        - receive otlp metrics
-        - process with memory_limiter, k8sattributes, metricstransform, batch
-        - exporter: prometheus
+        - receive `otlp metrics`
+        - process with `memory_limiter`, `k8sattributes` , `metricstransform` , `batch`
+        - exporter: `prometheus`
      ![metric pipeline 01](../../assets/images/metric_pipeline.png)
      
 2. Replace the prometheus exporter with the dynatrace exporter 
