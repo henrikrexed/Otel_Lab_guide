@@ -11,7 +11,7 @@ In this lab you'll learn how to :
 
 In the Bastion host, go to o the folder : `exercice/01_collector/trace`
    ```bash
-   (bastion)$ cd ~
+   (bastion)$ cd ~/ACE_OTEL_SCRIPT
    (bastion)$ cd exercice/01_collector/trace`
    (bastion)$ cat openTelemetry-manifest.yaml
    ```
