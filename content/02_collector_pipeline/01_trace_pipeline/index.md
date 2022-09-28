@@ -12,7 +12,7 @@ In this lab you'll learn how to :
 In the Bastion host, go to o the folder : `exercice/01_collector/trace`
    ```bash
    (bastion)$ cd ~/ACE_OTEL_SCRIPT
-   (bastion)$ cd exercice/01_collector/trace`
+   (bastion)$ cd exercice/01_collector/trace
    (bastion)$ cat openTelemetry-manifest.yaml
    ```
 This collector is currently receiving traces and exporting it directly the logging exporter.
@@ -29,7 +29,7 @@ This collector is currently receiving traces and exporting it directly the loggi
    kubectl get pods 
    ```
    you should have one pod running with our collector :
-   ![Pod 01](../../assets/images/pod_01.png)
+   ![Pod 01](../../assets/images/pod01.png)
 
    Copy the pod name of the collector , and display the logs :
 
@@ -115,18 +115,26 @@ This collector is currently receiving traces and exporting it directly the loggi
 
 ### Step 4. Add the spanMetrics processor
 
-1. Add the fake  `otlp/spanmetrics` receiver and exporter
-   Edit the and add the fake receiver and exporter:
+1. Add the fake  `otlp/spanmetrics` receiver
+   Edit the following receiver :
    
     ```yaml
    otlp/spanmetrics:
-      endpoint: "localhost:<random port>"
-      tls:
-      insecure: true
+        protocols:
+          grpc:
+            endpoint: "localhost:65535"
     ```
-   Note: the port of the receiver and the exporter needs to be different.
+
   ```bash
    (bastion)$ vi openTelemetry-manifest.yaml
+   ```
+
+1. Add the fake  `otlp/spanmetrics` exporter
+   ```yaml
+   otlp/spanmetrics:
+      endpoint: "localhost:55677"
+      tls:
+        insecure: true
    ```
 1. Add a specific  `metrics/spanmetrics` pipeline
    Similar to the trace pipeline , we need to add a "fake" pipeline for ``metrics/spanmetrics`
