@@ -187,13 +187,13 @@ This collector is currently receiving traces and exporting it directly the loggi
    Expose the port 9090 locally on the bastion host :
    
    ```bash
-   (bastion)$ kubectl port-forward <collector pod name> 9090:9090
+   (bastion)$ kubectl port-forward <collector pod name> 9091:9090
    ```
 
    Open another terminal and connect to the bastion host.
    Look at the metrics by send http request to `http://localhost:9090/metrics`
    
    ```bash
-   (bastion)$ curl http://localhost:9090/metrics
+   (bastion)$ curl http://localhost:9091/metrics
    ```
    
