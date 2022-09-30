@@ -64,8 +64,7 @@ In this lab you'll learn how to :
    
 ### Step 2: Look at the produced metrics
 
-1. Create a new file named `hello_world.sh` and add the following content:
-   In your Dynatrace tenant:
+1. In your Dynatrace tenant:
    > 1. Navigate to `Metrics` via Dynatrace Menu
    > 2. Search for `acereconnect`
    
