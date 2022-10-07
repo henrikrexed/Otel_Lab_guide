@@ -7,9 +7,10 @@
 3. The Dynatrace envrionment can be accessed by navigating to 'Environments' in the virtural classroom, clicking on 'View Environment'.
 
 ![started 1](../../assets/images/image843.png)
- If you have putty or your confortable using the `Command line`, then you can connect to the bastion host wiht :
+
+ If you have putty or your comfortable using the `Command line`, then you can connect to the bastion host with :
 ```bash 
-ssh dtu_training@ip_adress
+ssh dtu_training@ip_address
 ```
 4. You can open multiple terminals, by duplicating the 'https://university.dynatrace.com/' and opening the terminal.
 5. The HoT session lab guides are found under 'Guide'

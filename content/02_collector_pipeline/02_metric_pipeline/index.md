@@ -7,7 +7,7 @@ In this lab you'll learn how to :
 * use the dynatrace exporter
 
 ### Step 1: Update the collector Pipeline
- 1. Look at  the OpenTelemetryCollector template
+ A. Look at  the OpenTelemetryCollector template
    In the Bastion host, go to o the folder : `exercice/01_collector/metrics`
     
    ```bash
@@ -16,23 +16,23 @@ In this lab you'll learn how to :
    (bastion)$ cat openTelemetry-manifest.yaml
    ```
 
- 2. Add a metricstransform processor 
+ B. Add a metricstransform processor 
+ 
+   Add in generated metrics one new label to store the K8s.cluster.name and the Cluster id.
+   To get the Cluster id run the following command :
+   
+   ```bash
+    kubectl get namespace kube-system -o jsonpath='{.metadata.uid}'
+   ```
     
-     Add in generated metrics one new label to store the K8s.cluster.name and the Cluster id.
-     To get the Cluster id run the following command :
+   Update the `openTelemetry-manifest.yaml` by adding the following processor :
     
-     ```bash
-     kubectl get namespace kube-system -o jsonpath='{.metadata.uid}'
-     ```
+   ```bash
+   (bastion)$ vi openTelemetry-manifest.yaml
+   ```
+   add the following processor 
     
-    Update the `openTelemetry-manifest.yaml` by adding the following processor :
-    
-    ```bash
-    (bastion)$ vi openTelemetry-manifest.yaml
-    ```
-    add the following processor 
-    
-    ```yaml
+   ```yaml
       metricstransform:
         transforms:
            include: .+
@@ -45,26 +45,38 @@ In this lab you'll learn how to :
              - action: add_label
                new_label: k8s.cluster.id
                new_value: <YOUR CLUSTER ID>             
-    ```
+   ```
     
-1. Add a metric pipeline
+C. Add a metric pipeline
     The metric that would :
         - receive `otlp metrics`
         - process with `memory_limiter`, `k8sattributes` , `metricstransform` , `batch`
         - exporter: `prometheus`
      ![metric pipeline 01](../../assets/images/metric_pipeline.png)
      
-2. Replace the prometheus exporter with the dynatrace exporter 
+D. Replace the prometheus exporter with the dynatrace exporter
 
-3. Apply the changes :
+   ```yaml
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter,k8attributes,spanmetrics,batch]
+      exporters: [logging,dynatrace]
+   ```
+
+
+Remember to change it under the processor as well:
+   ```YAML
+    spanmetrics:
+      metrics_exporter: dynatrace
+   ```
+E. Apply the changes :
    
    ```bash
    (bastion)$ kubectl apply -f  openTelemetry-manifest.yaml
    ```
    
 ### Step 2: Look at the produced metrics
-
-1. In your Dynatrace tenant:
+A. In your Dynatrace tenant:
    > 1. Navigate to `Metrics` via Dynatrace Menu
    > 2. Search for `acereconnect`
    
