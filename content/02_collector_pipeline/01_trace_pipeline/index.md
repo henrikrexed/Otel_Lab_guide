@@ -57,12 +57,12 @@ B. Add k8s attributes
    The following Service Account has already been deployed and has all the right privileges: `otelcontribcol`
    
    Add the following extra attributes :
-     * k8s.pod.name
-     * k8s.pod.uid
-     * k8s.deployment.name
-     * k8s.namespace.name
-     * k8s.node.name
-     * k8s.pod.start_time
+   * `k8s.pod.name`
+   * `k8s.pod.uid`
+   * `k8s.deployment.name`
+   * `k8s.namespace.name`
+   * `k8s.node.name`
+   * `k8s.pod.start_time`
    
 Here is the link to documentation of the [k8sattributes processor](https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor).
    
