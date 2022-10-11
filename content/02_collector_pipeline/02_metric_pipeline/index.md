@@ -48,11 +48,12 @@ In this lab you'll learn how to :
    ```
     
 C. Add a metric pipeline
-    The metric that would :
-        - receive `otlp metrics`
-        - process with `memory_limiter`, `k8sattributes` , `metricstransform` , `batch`
-        - exporter: `prometheus`
-     ![metric pipeline 01](../../assets/images/metric_pipeline.png)
+   The metric that would :
+   * receive `otlp metrics`
+   * process with `memory_limiter`, `k8sattributes` , `metricstransform` , `batch`
+   * exporter: `prometheus`
+   
+   ![metric pipeline 01](../../assets/images/metric_pipeline.png)
      
 D. Replace the prometheus exporter with the dynatrace exporter
 

@@ -160,7 +160,8 @@ B. Add the fake  `otlp/spanmetrics` exporter:
      endpoint: "localhost:55677"
      tls:
        insecure: true
-  ```     
+  ```
+
 C. Add a specific  `metrics/spanmetrics` pipeline
    Similar to the trace pipeline , we need to add a "fake" pipeline for ``metrics/spanmetrics`
    
