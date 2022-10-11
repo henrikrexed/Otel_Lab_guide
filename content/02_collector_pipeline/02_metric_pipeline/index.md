@@ -59,7 +59,7 @@ D. Replace the prometheus exporter with the dynatrace exporter
    ```yaml
     metrics:
       receivers: [otlp]
-      processors: [memory_limiter,k8attributes,spanmetrics,batch]
+      processors: [memory_limiter,k8sattributes,spanmetrics,batch]
       exporters: [logging,dynatrace]
    ```
 

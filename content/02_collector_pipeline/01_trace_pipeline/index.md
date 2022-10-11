@@ -52,16 +52,19 @@ A. Edit the OpenTelemetryCollector object
 B. Add k8s attributes 
    Adding k8s attributes to the generated traces , means using the processor `k8sattributes`.
    `k8sattributes` will interact with the k8s Api to collect details related to the span.
+   
    To interact with the Api , you need to use a Service Account having the right cluster role.
    The following Service Account has already been deployed and has all the right privileges: `otelcontribcol`
+   
    Add the following extra attributes :
-     - k8s.pod.name
-     - k8s.pod.uid
-     - k8s.deployment.name
-     - k8s.namespace.name
-     - k8s.node.name
-     - k8s.pod.start_time
-   Here is the link to documentation of the [k8sattributes processor](https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor).
+     * k8s.pod.name
+     * k8s.pod.uid
+     * k8s.deployment.name
+     * k8s.namespace.name
+     * k8s.node.name
+     * k8s.pod.start_time
+   
+Here is the link to documentation of the [k8sattributes processor](https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor).
    
  
    Edit the `openTelemetry-manifest.yaml`, by adding the right defintion of processor
@@ -95,12 +98,13 @@ C. Change the Processor flow
    Change the Processor flow in the trace pipeline to add the `k8sattributes` after the `memory_limiter`
    Apply the change made on the collector :
     
-   ```bash 
+   ```bash
    (bastion)$ kubectl apply -f openTelemetry-manifest.yaml
    ```
    
 D. Look at the logs of the collector to see the updated format of the spans
-   Get the new Pod name of the colellector and look a the logs :
+   Get the new Pod name of the collector and look a the logs :
+
    ```bash
    (bastion)$ kubectl logs  <Collector pod name>
    ```
@@ -145,20 +149,21 @@ A. Add the fake  `otlp/spanmetrics` receiver
    
    ```yaml
    otlp/spanmetrics:
-        protocols:
-          grpc:
-            endpoint: "localhost:65535"
+     protocols:
+       grpc:
+         endpoint: "localhost:65535"
    ```
 
 B. Add the fake  `otlp/spanmetrics` exporter:
   ```yaml
    otlp/spanmetrics:
      endpoint: "localhost:55677"
-      tls:
-        insecure: true
+     tls:
+       insecure: true
   ```     
 C. Add a specific  `metrics/spanmetrics` pipeline
    Similar to the trace pipeline , we need to add a "fake" pipeline for ``metrics/spanmetrics`
+   
    ```yaml
    metrics/spanmetrics:
       receivers: [otlp/spanmetrics]
